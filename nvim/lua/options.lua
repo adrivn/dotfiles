@@ -5,7 +5,25 @@ vim.g.have_nerd_font = true
 vim.o.termguicolors = true
 
 -- Set transparent background
-for _, n in pairs({ "Normal", "NormalFloat", "LineNr", "SignColumn" }) do
+for _, n in pairs({
+	"Normal",
+	"NormalFloat",
+	"LineNr",
+	"SignColumn",
+	"NvimTreeNormal",
+	"NvimTreeNormalNC",
+	-- "NvimTreeWinSeparator",
+	-- "NvimTreeCursorColumn",
+	-- "NvimTreeCursorLine",
+	"TroubleNormal",
+	"TelescopeNormal",
+	"TelescopePromptNormal",
+	"TelescopePreviewNormal",
+	"TelescopeResultsNormal",
+	"TelescopeBorder",
+	"WhichKeyFloat",
+	"WhichKeyNormal",
+}) do
 	vim.api.nvim_set_hl(0, n, { bg = "none" })
 end
 

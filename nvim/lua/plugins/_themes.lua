@@ -19,4 +19,6 @@ return {
 	{ "joshdick/onedark.vim" },
 	{ "tanvirtin/monokai.nvim" },
 	{ "lunarvim/darkplus.nvim" },
+	{ "rose-pine/neovim", name = "rose-pine" },
+	{ "catppuccin/nvim", name = "catppuccin" },
 }
