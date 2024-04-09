@@ -11,3 +11,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+
+-- Autoopen Nvim-tree upon entering Nvim
+vim.api.nvim_create_autocmd("VimEnter", {
+	desc = "Autoopen Nvim-tree upon entering Nvim",
+	callback = function()
+		require("nvim-tree.api").tree.open()
+	end,
+})
