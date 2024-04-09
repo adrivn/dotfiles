@@ -14,31 +14,56 @@ return {
 	-- better escape from insert mode using j & k
 	{
 		"max397574/better-escape.nvim",
-		config = function()
-			require("better_escape").setup()
-		end,
-	},
-	-- bufferline, what else
-	{ "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
-	-- gotta jump fast
-	{
-		"folke/flash.nvim",
-		event = "VeryLazy",
-		---@type Flash.Config
 		opts = {},
 	},
+	-- barbar, lets try instead of bufferline
 	{
-		"ahmedkhalf/project.nvim",
-		config = function()
-			require("telescope").load_extension("projects")
-			require("project_nvim").setup({
-				sync_root_with_cwd = true,
-				respect_buf_cwd = true,
-				update_focused_file = {
-					enable = true,
-					update_root = true,
-				},
-			})
+		"romgrk/barbar.nvim",
+		dependencies = {
+			"lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
+			"nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
+		},
+		init = function()
+			vim.g.barbar_auto_setup = false
 		end,
+		opts = {
+			-- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+			animation = true,
+			insert_at_start = true,
+			sidebar_filetypes = {
+				-- Use the default values: {event = 'BufWinLeave', text = '', align = 'left'}
+				NvimTree = true, -- …etc.
+			},
+		},
+		version = "^1.0.0", -- optional: only update when a new 1.x version is released
+	},
+	-- -- bufferline, what else
+	-- {
+	-- 	"akinsho/bufferline.nvim",
+	-- 	version = "*",
+	-- 	dependencies = "nvim-tree/nvim-web-devicons",
+	-- 	opts = {
+	-- 		offsets = {
+	-- 			{
+	-- 				filetype = "NvimTree",
+	-- 				text = function()
+	-- 					return vim.fn.getcwd()
+	-- 				end,
+	-- 				highlight = "Directory",
+	-- 				text_align = "left",
+	-- 			},
+	-- 		},
+	-- 	},
+	-- },
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {
+			options = {
+				theme = "dracula",
+				-- dracula, codedark, ayu_dark, horizon, onedark, nightfly
+				globalstatus = true,
+			},
+		},
 	},
 }

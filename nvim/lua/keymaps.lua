@@ -12,6 +12,15 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
+-- Toggle line number and relative line number
+vim.keymap.set("n", "<leader>tn", "<cmd>echo 'Not yet!'<CR>", { desc = "[T]oggle line [N]umber" })
+vim.keymap.set("n", "<leader>tr", "<cmd>echo 'Not yet!'<CR>", { desc = "[T]oggle [R]elative line number" })
+
+-- Buffer navigation
+vim.keymap.set("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Next buffer", silent = true })
+vim.keymap.set("n", "<S-Tab>", "<cmd>bprev<CR>", { desc = "Previous buffer", silent = true })
+vim.keymap.set("n", "<A-w>", "<cmd>bd<CR><cmd>bprev<CR>", { desc = "Close buffer", silent = true })
+
 -- NvimTree
 vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>")
 
@@ -73,3 +82,47 @@ end, { desc = "[F]ind [/] in Open Files" })
 vim.keymap.set("n", "<leader>pf", function()
 	require("telescope").extensions.projects.projects()
 end, { desc = "[P]roject [F]inder" })
+
+-- LazyGit
+vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit instance" })
+
+-- -- Trouble
+vim.keymap.set("n", "<leader>tx", "<cmd>TroubleToggle<CR>", { desc = "Open Trouble Menu" })
+vim.keymap.set(
+	"n",
+	"<leader>tw",
+	"<cmd>TroubleToggle workspace_diagnostics<CR>",
+	{ desc = "Open Workspace Diagnostics" }
+)
+vim.keymap.set(
+	"n",
+	"<leader>td",
+	"<cmd>TroubleToggle document_diagnostics<CR>",
+	{ desc = "<cmd>TroubleToggle document_diagnostics<CR>" }
+)
+vim.keymap.set("n", "<leader>tl", "<cmd>TroubleToggle loclist<CR>", { desc = "<cmd>TroubleToggle loclist<CR>" })
+vim.keymap.set("n", "<leader>tq", "<cmd>TroubleToggle quickfix<CR>", { desc = "Open Quick Fix Menu" })
+vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<CR>", { desc = "<cmd>TroubleToggle lsp_references<CR>" })
+vim.keymap.set("n", "<leader>tt", "<cmd>TodoTelescope<CR>", { desc = "Open TODO Telescope" })
+--
+-- Substitute
+vim.keymap.set("n", "s", function()
+	require("substitute").operator()
+end, { desc = "Substitute" })
+vim.keymap.set("n", "ss", function()
+	require("substitute").line()
+end, { desc = "Substitute entire line" })
+vim.keymap.set("n", "S", function()
+	require("substitute").eol()
+end, { desc = "Substitute from current position to the end of line" })
+vim.keymap.set("x", "S", function()
+	require("substitute").visual()
+end, { desc = "Substitute (visual mode)" })
+
+-- Project
+vim.keymap.set("n", "<leader>pf", "<cmd>Telescope projects<CR>", { desc = "Open projects list" })
+
+-- Inlay hints
+vim.keymap.set("n", "<leader>ih", function()
+	vim.lsp.inlay_hint(0, nil)
+end, { desc = "Toggle inlay hints" })
