@@ -1,6 +1,14 @@
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
 
+-- Have the terminal share the same colors from Neovim
+vim.o.termguicolors = true
+
+-- Set transparent background
+for _, n in pairs({ "Normal", "NormalFloat", "LineNr", "SignColumn" }) do
+	vim.api.nvim_set_hl(0, n, { bg = "none" })
+end
+
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
@@ -55,8 +63,9 @@ vim.opt.splitbelow = true
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+-- WARN: Disabled for now
+-- vim.opt.list = true
+-- vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = "split"
