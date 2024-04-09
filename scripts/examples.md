@@ -13,3 +13,15 @@ stow --target=/home/<usuario>/.config/nvim nvim
 
 Lectura interesante para el uso de GNU Stow:
 - https://venthur.de/2021-12-19-managing-dotfiles-with-stow.html
+
+# Crear junctions en Windows
+
+```powershell
+New-Item -ItemType Junction -Path $HOME/AppData/Local -Name <name-of-the-shortcut> -Target $<dotfiles-repo-root>/nvim
+```
+
+Y después de esto, usamos NVIM_APPNAME con este atajo, nombrado como hayamos querido.
+
+```powershell
+$env:NVIM_APPNAME=<name-of-the-shortcut>; & nvim
+```
