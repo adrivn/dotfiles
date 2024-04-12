@@ -14,4 +14,6 @@ fish_add_path "$HOME/.bin"
 fish_add_path "$HOME/.local/share/fnm"
 # uv
 fish_add_path "$HOME/.cargo/env"
+# more aliases
+alias nvchad="NVIM_APPNAME=nvchad nvim"
 end
