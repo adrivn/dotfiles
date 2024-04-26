@@ -17,8 +17,8 @@ vim.keymap.set("n", "<leader>tn", "<cmd>echo 'Not yet!'<CR>", { desc = "[T]oggle
 vim.keymap.set("n", "<leader>tr", "<cmd>echo 'Not yet!'<CR>", { desc = "[T]oggle [R]elative line number" })
 
 -- Buffer navigation
-vim.keymap.set("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Next buffer", silent = true })
-vim.keymap.set("n", "<S-Tab>", "<cmd>bprev<CR>", { desc = "Previous buffer", silent = true })
+vim.keymap.set("n", "<Tab>", "<cmd>bprev<CR>", { desc = "Next buffer", silent = true })
+vim.keymap.set("n", "<S-Tab>", "<cmd>bnext<CR>", { desc = "Previous buffer", silent = true })
 vim.keymap.set("n", "<A-w>", "<cmd>bd<CR><cmd>bprev<CR>", { desc = "Close buffer", silent = true })
 
 -- NvimTree

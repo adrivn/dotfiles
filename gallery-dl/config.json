@@ -1,0 +1,21 @@
+{
+    "extractor": {
+        "base-directory": "~/Pictures/gallery-dl/",
+        "#": "set global archive file for all extractors",
+        "archive": "~/Pictures/gallery-dl/archive.sqlite3",
+        "archive-pragma": ["journal_mode=WAL", "synchronous=NORMAL"],
+        "twitter": {
+            "username": "<you-know-what-account>",
+            "password": "<you-know-what-password>"
+        }
+    },
+    "downloader": {
+
+    },
+    "output": {
+
+    },
+    "postprocessor": {
+
+    }
+}

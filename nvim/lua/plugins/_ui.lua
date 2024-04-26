@@ -60,7 +60,7 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
 			options = {
-				theme = "dracula",
+				theme = "ayu_dark",
 				-- dracula, codedark, ayu_dark, horizon, onedark, nightfly
 				globalstatus = true,
 			},

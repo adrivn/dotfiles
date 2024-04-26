@@ -21,4 +21,5 @@ return {
 	{ "lunarvim/darkplus.nvim" },
 	{ "rose-pine/neovim", name = "rose-pine" },
 	{ "catppuccin/nvim", name = "catppuccin" },
+	{ "sam4llis/nvim-tundra" },
 }
