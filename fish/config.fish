@@ -1,8 +1,7 @@
 # Remove greeting at startup
 set -g fish_greeting
-# Renames fdfind to fd, as it should
-alias fd="fdfind"
-alias cat="batcat"
+# fdfind may not need to be renamed, only in ubuntu, ignore for now
+alias cat="bat"
 alias lsd="eza --long --header --git --icons"
 alias anvim="NVIM_APPNAME=anvim nvim"
 alias nvchad="NVIM_APPNAME=nvchad nvim"
@@ -15,9 +14,14 @@ end
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+# rust binaries (bob, fnm, uv)
+set --export PATH $HOME/.cargo/bin $PATH
+set --export PATH "/home/amg/.local/share/fnm" $PATH
+# Neovim via bob
+set --export PATH "/home/amg/.local/share/bob/nvim-bin" $PATH
+
 
 # fnm
-set PATH "/root/.fnm" $PATH
 fnm env | source
 
 # Runs Starship prompt

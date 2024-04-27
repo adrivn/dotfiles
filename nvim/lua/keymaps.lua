@@ -124,5 +124,5 @@ vim.keymap.set("n", "<leader>pf", "<cmd>Telescope projects<CR>", { desc = "Open 
 
 -- Inlay hints
 vim.keymap.set("n", "<leader>ih", function()
-	vim.lsp.inlay_hint(0, nil)
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(), { nil, vim.api.nvim_get_current_buf() })
 end, { desc = "Toggle inlay hints" })

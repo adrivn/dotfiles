@@ -267,8 +267,19 @@ return {
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
 				-- clangd = {},
-				gopls = {},
-				pyright = {},
+				gopls = {
+					settings = {
+						gopls = {
+							["ui.inlayhint.hints"] = {
+								compositeLiteralFields = true,
+								constantValues = true,
+								parameterNames = true,
+							},
+							gofumpt = true,
+						},
+					},
+				},
+				basedpyright = {},
 				-- rust_analyzer = {},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 				-- tsserver = {},
@@ -278,6 +289,9 @@ return {
 					-- capabilities = {},
 					settings = {
 						Lua = {
+							diagnostics = { globals = { "vim" } },
+							telemetry = { enable = false },
+							hint = { enable = true },
 							completion = {
 								callSnippet = "Replace",
 							},
