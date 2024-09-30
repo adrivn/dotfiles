@@ -1,8 +1,20 @@
 -- [[ Basic Keymaps ]]
---  See `:help vim.keymap.set()`
-
 vim.keymap.set("n", ";", ":", { desc = "Remap semicolon, for the butter fingers" })
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+vim.keymap.set("n", "<C-q>", "<cmd>q<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-s>", "<cmd>w<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "x", '"_x', { desc = "", noremap = true, silent = true })
+vim.keymap.set("n", "<Tab>", ":bnext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>x", ":bdelete!<CR>", { desc = "Close buffer", noremap = true, silent = true })
+vim.keymap.set("n", "<leader>b", "<cmd>enew<CR>", { desc = "New buffer", noremap = true, silent = true })
+vim.keymap.set("v", "<", "<gv", { noremap = true, silent = true })
+vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true })
+vim.keymap.set("n", "<A-Up>", ":resize -2<CR>", { desc = "", noremap = true, silent = true })
+vim.keymap.set("n", "<A-Down>", ":resize +2<CR>", { desc = "", noremap = true, silent = true })
+vim.keymap.set("n", "<A-Left>", ":vertical resize -2<CR>", { desc = "", noremap = true, silent = true })
+vim.keymap.set("n", "<A-Right>", ":vertical resize +2<CR>", { desc = "", noremap = true, silent = true })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -16,13 +28,21 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }
 vim.keymap.set("n", "<leader>tn", "<cmd>echo 'Not yet!'<CR>", { desc = "[T]oggle line [N]umber" })
 vim.keymap.set("n", "<leader>tr", "<cmd>echo 'Not yet!'<CR>", { desc = "[T]oggle [R]elative line number" })
 
--- Buffer navigation
-vim.keymap.set("n", "<Tab>", "<cmd>bprev<CR>", { desc = "Next buffer", silent = true })
-vim.keymap.set("n", "<S-Tab>", "<cmd>bnext<CR>", { desc = "Previous buffer", silent = true })
-vim.keymap.set("n", "<A-w>", "<cmd>bd<CR><cmd>bprev<CR>", { desc = "Close buffer", silent = true })
-
--- NvimTree
-vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>")
+-- hop.nvim
+local hop = require("hop")
+local directions = require("hop.hint").HintDirection
+vim.keymap.set("", "f", function()
+	hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
+end, { remap = true })
+vim.keymap.set("", "F", function()
+	hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
+end, { remap = true })
+vim.keymap.set("", "t", function()
+	hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false, hint_offset = -1 })
+end, { remap = true })
+vim.keymap.set("", "T", function()
+	hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false, hint_offset = 1 })
+end, { remap = true })
 
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
@@ -70,41 +90,20 @@ vim.keymap.set("n", "<leader>f/", function()
 	})
 end, { desc = "[F]ind [/] in Open Files" })
 
--- Shortcut for searching your Neovim configuration files
--- HACK: This does not work with symlinks so better to comment it out for now
---
--- vim.keymap.set("n", "<leader>fn", function()
--- 	builtin.find_files({ cwd = vim.fn.stdpath("config") })
--- end, { desc = "[S]earch [N]eovim files" })
-
 -- Projects browser
--- vim.keymap.set("n", "<leader>pf", ":Telescope projects<CR>", { desc = "[P]roject [F]inder", silent = true })
-vim.keymap.set("n", "<leader>pf", function()
-	require("telescope").extensions.projects.projects()
-end, { desc = "[P]roject [F]inder" })
+vim.keymap.set(
+	"n",
+	"<leader>pf",
+	":Telescope projects<CR>",
+	{ desc = "[P]roject [F]inder", silent = true, noremap = true }
+)
+-- vim.keymap.set("n", "<leader>pf", function()
+-- 	require("telescope").extensions.projects.projects()
+-- end, { desc = "[P]roject [F]inder" })
 
 -- LazyGit
-vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit instance" })
+vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit instance", silent = true, noremap = true })
 
--- -- Trouble
-vim.keymap.set("n", "<leader>tx", "<cmd>TroubleToggle<CR>", { desc = "Open Trouble Menu" })
-vim.keymap.set(
-	"n",
-	"<leader>tw",
-	"<cmd>TroubleToggle workspace_diagnostics<CR>",
-	{ desc = "Open Workspace Diagnostics" }
-)
-vim.keymap.set(
-	"n",
-	"<leader>td",
-	"<cmd>TroubleToggle document_diagnostics<CR>",
-	{ desc = "<cmd>TroubleToggle document_diagnostics<CR>" }
-)
-vim.keymap.set("n", "<leader>tl", "<cmd>TroubleToggle loclist<CR>", { desc = "<cmd>TroubleToggle loclist<CR>" })
-vim.keymap.set("n", "<leader>tq", "<cmd>TroubleToggle quickfix<CR>", { desc = "Open Quick Fix Menu" })
-vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<CR>", { desc = "<cmd>TroubleToggle lsp_references<CR>" })
-vim.keymap.set("n", "<leader>tt", "<cmd>TodoTelescope<CR>", { desc = "Open TODO Telescope" })
---
 -- Substitute
 vim.keymap.set("n", "s", function()
 	require("substitute").operator()
@@ -118,11 +117,3 @@ end, { desc = "Substitute from current position to the end of line" })
 vim.keymap.set("x", "S", function()
 	require("substitute").visual()
 end, { desc = "Substitute (visual mode)" })
-
--- Project
-vim.keymap.set("n", "<leader>pf", "<cmd>Telescope projects<CR>", { desc = "Open projects list" })
-
--- Inlay hints
-vim.keymap.set("n", "<leader>ih", function()
-	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(), { nil, vim.api.nvim_get_current_buf() })
-end, { desc = "Toggle inlay hints" })
