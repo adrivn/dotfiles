@@ -20,6 +20,10 @@ return {
 			{ "\\", ":Neotree reveal<CR>", desc = "NeoTree reveal", silent = true },
 		},
 		opts = {
+			window = {
+				width = 30,
+				position = "right",
+			},
 			filesystem = {
 				window = {
 					mappings = {
@@ -104,6 +108,7 @@ return {
 					component_separators = { left = "", right = "" },
 					disabled_filetypes = { "alpha", "neo-tree" },
 					always_divide_middle = true,
+					globalstatus = true,
 				},
 				sections = {
 					lualine_a = { mode },
