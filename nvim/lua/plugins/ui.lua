@@ -6,14 +6,6 @@ return {
 		main = "ibl",
 		opts = {},
 	},
-	-- breadcrumbs a la VSCode
-	{
-		"Bekaboo/dropbar.nvim",
-		-- optional, but required for fuzzy finder support
-		dependencies = {
-			"nvim-telescope/telescope-fzf-native.nvim",
-		},
-	},
 	-- scrollbar with good stuff
 	{ "lewis6991/satellite.nvim", event = "VeryLazy", opts = {} },
 

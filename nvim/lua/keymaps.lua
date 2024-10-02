@@ -97,9 +97,6 @@ vim.keymap.set(
 	":Telescope projects<CR>",
 	{ desc = "[P]roject [F]inder", silent = true, noremap = true }
 )
--- vim.keymap.set("n", "<leader>pf", function()
--- 	require("telescope").extensions.projects.projects()
--- end, { desc = "[P]roject [F]inder" })
 
 -- LazyGit
 vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit instance", silent = true, noremap = true })
