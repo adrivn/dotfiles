@@ -49,3 +49,31 @@ vim.opt.inccommand = "split"
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
+
+-- Ignore default color schemes
+vim.opt.wildignore:append({
+	"blue.vim",
+	"darkblue.vim",
+	"delek.vim",
+	"desert.vim",
+	"elflord.vim",
+	"evening.vim",
+	"industry.vim",
+	"habamax.vim",
+	"koehler.vim",
+	"lunaperche.vim",
+	"morning.vim",
+	"murphy.vim",
+	"pablo.vim",
+	"peachpuff.vim",
+	"quiet.vim",
+	"ron.vim",
+	"shine.vim",
+	"slate.vim",
+	"sorbet.vim",
+	"retrobox.vim",
+	"torte.vim",
+	"wildcharm.vim",
+	"zaibatsu.vim",
+	"zellner.vim",
+})

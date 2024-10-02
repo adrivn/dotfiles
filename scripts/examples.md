@@ -25,3 +25,11 @@ Y después de esto, usamos NVIM_APPNAME con este atajo, nombrado como hayamos qu
 ```powershell
 $env:NVIM_APPNAME=<name-of-the-shortcut>; & nvim
 ```
+
+Para linkar la config de Wezterm por ejemplo:
+
+```powershell
+New-Item -ItemType Junction -Path $env:HOMEPATH/.config -Name wezterm -Target $env:HOMEPATH/dotfiles/wezterm
+```
+
+Aquí el -Name corresponde al shortcut, ubicado en -Path que redireccionará a -Target cuando se acceda a él

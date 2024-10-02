@@ -5,6 +5,9 @@ return {
 		"zeioth/project.nvim",
 		event = "User BaseDefered",
 		cmd = "ProjectRoot",
+		init = function()
+			require("telescope").load_extension("projects")
+		end,
 		opts = {
 			-- How to find root directory
 			patterns = {
@@ -53,8 +56,12 @@ return {
 	{ "gbprod/substitute.nvim", opts = {} },
 	{
 		"kylechui/nvim-surround",
-		version = "*", -- Use for stability; omit to use `main` branch for the latest features
 		event = "VeryLazy",
+		opts = {},
+	},
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {},
 	},
 }
