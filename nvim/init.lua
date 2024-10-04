@@ -7,6 +7,9 @@ else
 	vim.g.mapleader = " "
 	vim.g.maplocalleader = " "
 
+	require("autocmds")
+	require("options")
+
 	local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 	if not vim.loop.fs_stat(lazypath) then
 		local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -38,7 +41,5 @@ else
 		},
 	})
 
-	require("autocmds")
-	require("options")
 	require("keymaps")
 end

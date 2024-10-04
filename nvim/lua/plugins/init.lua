@@ -3,22 +3,9 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-	-- {
-	-- 	"nvim-tree/nvim-tree.lua",
-	-- 	version = "*",
-	-- 	lazy = true,
-	-- 	dependencies = {
-	-- 		"nvim-tree/nvim-web-devicons",
-	-- 	},
-	-- 	opts = {},
-	-- },
-	-- "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
-
 	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
 		opts = {},
-		-- opts from kickstart are garbage, delete all
-		-- or better yet, browse and search for some good ones
 	},
 	--  hop.nvim [go to word visually]
 	--  https://github.com/smoka7/hop.nvim

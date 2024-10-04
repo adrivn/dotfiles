@@ -64,4 +64,13 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {},
 	},
+	{
+		"akinsho/toggleterm.nvim",
+		version = "*",
+		opts = {
+			open_mapping = "<C-\\>",
+			start_in_insert = true,
+			-- direction = "float",
+		},
+	},
 }
