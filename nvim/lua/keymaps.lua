@@ -101,6 +101,20 @@ vim.keymap.set(
 -- LazyGit
 vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit instance", silent = true, noremap = true })
 
+-- TreeSJ
+vim.keymap.set(
+	"n",
+	"<leader>ps",
+	require("treesj").split,
+	{ desc = "[P]aragraph [S]plit", silent = true, noremap = true }
+)
+vim.keymap.set(
+	"n",
+	"<leader>pj",
+	require("treesj").join,
+	{ desc = "[P]aragraph [J]oin", silent = true, noremap = true }
+)
+
 -- Substitute
 vim.keymap.set("n", "s", function()
 	require("substitute").operator()
@@ -115,7 +129,7 @@ vim.keymap.set("x", "S", function()
 	require("substitute").visual()
 end, { desc = "Substitute (visual mode)" })
 -- ToggleTerm
-vim.keymap.set("n", "<A-h>", "<cmd>ToggleTerm<CR>", { silent = true, noremap = true })
+vim.keymap.set({ "n", "t", "i" }, "<A-h>", "<cmd>ToggleTerm<CR>", { silent = true, noremap = true })
 
 function _G.set_terminal_keymaps()
 	local opts = { buffer = 0 }
