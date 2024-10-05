@@ -70,7 +70,12 @@ vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagno
 vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]esume" })
 vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = '[F]ind Recent/[O]ld Files ("." for repeat)' })
 vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind existing [B]uffers" })
-vim.keymap.set("n", "<leader>th", builtin.colorscheme, { desc = "[TH]eme picker" })
+vim.keymap.set("n", "<leader>th", function()
+	builtin.colorscheme({
+		enable_preview = true,
+		ignore_builtins = true,
+	})
+end, { desc = "[TH]eme picker" })
 
 -- Slightly advanced example of overriding default behavior and theme
 vim.keymap.set("n", "<leader>/", function()
