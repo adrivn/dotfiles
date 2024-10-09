@@ -76,6 +76,9 @@ vim.keymap.set("n", "<leader>th", function()
 		ignore_builtins = true,
 	})
 end, { desc = "[TH]eme picker" })
+vim.keymap.set("n", "<leader>fn", function()
+	require("telescope").extensions.notify.notify()
+end, { desc = "[F]ind in [N]otifications" })
 
 -- Slightly advanced example of overriding default behavior and theme
 vim.keymap.set("n", "<leader>/", function()

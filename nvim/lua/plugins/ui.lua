@@ -7,8 +7,39 @@ return {
 		opts = {},
 	},
 	-- scrollbar with good stuff
-	{ "lewis6991/satellite.nvim", event = "VeryLazy", opts = {} },
-
+	{
+		"petertriho/nvim-scrollbar",
+		event = "User BaseFile",
+		opts = {
+			handlers = {
+				gitsigns = true, -- gitsigns integration (display hunks)
+				ale = true, -- lsp integration (display errors/warnings)
+				search = false, -- hlslens integration (display search result)
+			},
+			excluded_filetypes = {
+				"cmp_docs",
+				"cmp_menu",
+				"noice",
+				"prompt",
+				"TelescopePrompt",
+				"alpha",
+			},
+		},
+	},
+	-- dressing, to improve the default vim.ui interfaces
+	{
+		"stevearc/dressing.nvim",
+		opts = {},
+	},
+	-- notify for popups and telescope integration
+	{
+		"rcarriga/nvim-notify",
+		opts = {},
+		init = function()
+			require("telescope").load_extension("notify")
+		end,
+	},
+	-- tree file browser
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",

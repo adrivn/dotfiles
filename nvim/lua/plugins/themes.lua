@@ -7,6 +7,12 @@ return {
 		"EdenEast/nightfox.nvim",
 		opts = { options = { transparent = true } },
 	},
-	{ "rose-pine/neovim", name = "rose-pine" },
-	{ "catppuccin/nvim", name = "catppuccin" },
+	{ "rose-pine/neovim", name = "rose-pine", opts = {
+		styles = {
+			transparency = true,
+		},
+	} },
+	{ "catppuccin/nvim", name = "catppuccin", opts = {
+		transparent_background = true,
+	} },
 }
