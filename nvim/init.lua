@@ -1,5 +1,6 @@
 if vim.g.vscode then
--- Run VScode extension
+	-- Run VScode extension
+	require("vsc")
 else
 	-- Set <space> as the leader key
 	-- See `:help mapleader`
