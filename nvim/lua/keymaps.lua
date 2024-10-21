@@ -106,8 +106,23 @@ vim.keymap.set(
 	{ desc = "[P]roject [F]inder", silent = true, noremap = true }
 )
 
--- LazyGit
+-- Git and stuff
 vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit instance", silent = true, noremap = true })
+vim.keymap.set("n", "<leader>gb", function()
+	require("gitsigns").blame_line()
+end, { desc = "Gitsigns: Blame line", silent = true, noremap = true })
+vim.keymap.set("n", "<leader>gB", function()
+	require("gitsigns").blame()
+end, { desc = "Gitsigns: Blame entire file", silent = true, noremap = true })
+vim.keymap.set("n", "<leader>gp", function()
+	require("gitsigns").preview_hunk()
+end, { desc = "Gitsigns: Preview Hunk", silent = true, noremap = true })
+vim.keymap.set("n", "ghp", function()
+	require("gitsigns").prev_hunk()
+end, { desc = "Gitsigns: Go to previous hunk", silent = true, noremap = true })
+vim.keymap.set("n", "ghn", function()
+	require("gitsigns").next_hunk()
+end, { desc = "Gitsigns: Go to next hunk", silent = true, noremap = true })
 
 -- TreeSJ
 vim.keymap.set(
