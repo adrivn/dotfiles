@@ -166,7 +166,7 @@ return {
 					lualine_z = {},
 				},
 				tabline = {},
-				extensions = { "fugitive" },
+				extensions = { "toggleterm", "neo-tree", "trouble", "mason", "lazy" },
 			})
 		end,
 	},
