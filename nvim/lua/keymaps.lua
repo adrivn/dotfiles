@@ -123,6 +123,15 @@ end, { desc = "Gitsigns: Go to previous hunk", silent = true, noremap = true })
 vim.keymap.set("n", "ghn", function()
 	require("gitsigns").next_hunk()
 end, { desc = "Gitsigns: Go to next hunk", silent = true, noremap = true })
+vim.keymap.set("n", "<leader>tb", function()
+	require("gitsigns").toggle_current_line_blame()
+end, { desc = "Gitsigns: Toggle Line Blame", silent = true, noremap = true })
+vim.keymap.set("n", "<leader>gd", function()
+	require("gitsigns").diffthis()
+end, { desc = "Gitsigns: Diff entire file", silent = true, noremap = true })
+vim.keymap.set("n", "<leader>td", function()
+	require("gitsigns").toggle_deleted()
+end, { desc = "Gitsigns: [T]oggle [D]eleted", silent = true, noremap = true })
 
 -- TreeSJ
 vim.keymap.set(
