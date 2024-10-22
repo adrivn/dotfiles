@@ -444,16 +444,17 @@ return {
 					-- `friendly-snippets` contains a variety of premade snippets.
 					--    See the README about individual language/framework/plugin snippets:
 					--    https://github.com/rafamadriz/friendly-snippets
-					-- {
-					--   'rafamadriz/friendly-snippets',
-					--   config = function()
-					--     require('luasnip.loaders.from_vscode').lazy_load()
-					--   end,
-					-- },
+					{
+						"rafamadriz/friendly-snippets",
+						config = function()
+							require("luasnip.loaders.from_vscode").lazy_load()
+						end,
+					},
 				},
 			},
+			"onsails/lspkind.nvim",
 			"saadparwaiz1/cmp_luasnip",
-
+			"roobert/tailwindcss-colorizer-cmp.nvim",
 			-- Adds other completion capabilities.
 			--  nvim-cmp does not ship with all sources by default. They are split
 			--  into multiple repos for maintenance purposes.
@@ -464,6 +465,9 @@ return {
 			-- See `:help cmp`
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
+			local lspkind = require("lspkind")
+			local tailwindcss_colorizer_cmp = require("tailwindcss-colorizer-cmp")
+
 			luasnip.config.setup({})
 
 			cmp.setup({
@@ -473,7 +477,35 @@ return {
 					end,
 				},
 				completion = { completeopt = "menu,menuone,noinsert" },
+				window = {
+					completion = {
+						border = "rounded", -- single|rounded|none
+						winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+						col_offset = -3,
+						side_padding = 0,
+					},
+					documentation = {
+						border = "rounded", -- single|rounded|none
+						winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:CursorLineBG,Search:None", -- BorderBG|FloatBorder
+					},
+				},
+				formatting = {
+					fields = { "kind", "abbr", "menu" },
+					format = function(entry, vim_item)
+						local kind = require("lspkind").cmp_format({
+							mode = "symbol_text",
+							maxwidth = 50,
+							ellipsis_char = "...",
+							-- prepend tailwindcss-colorizer
+							before = tailwindcss_colorizer_cmp.formatter,
+						})(entry, vim_item)
+						local strings = vim.split(kind.kind, "%s", { trimempty = true })
+						kind.kind = " " .. (strings[1] or "") .. " "
+						kind.menu = "    (" .. (strings[2] or "") .. ")"
 
+						return kind
+					end,
+				},
 				-- For an understanding of why these mappings were
 				-- chosen, you will need to read `:help ins-completion`
 				--
