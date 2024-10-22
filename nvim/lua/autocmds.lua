@@ -11,3 +11,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+
+-- Disable folding on alpha buffer
+vim.cmd([[ autocmd FileType alpha setlocal nofoldenable ]])
