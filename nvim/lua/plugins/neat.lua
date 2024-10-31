@@ -60,11 +60,6 @@ return {
 		opts = {},
 	},
 	{
-		"folke/todo-comments.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = {},
-	},
-	{
 		"akinsho/toggleterm.nvim",
 		version = "*",
 		opts = {
@@ -76,5 +71,10 @@ return {
 		"Wansmer/treesj",
 		dependencies = { "nvim-treesitter/nvim-treesitter" }, -- if you install parsers with `nvim-treesitter`
 		opts = { use_default_keymaps = false },
+	},
+	{
+		"folke/trouble.nvim",
+		opts = {}, -- for default options, refer to the configuration section for custom setup.
+		cmd = "Trouble",
 	},
 }
