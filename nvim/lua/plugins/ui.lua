@@ -70,6 +70,7 @@ return {
 	-- highlight undo
 	{
 		"tzachar/highlight-undo.nvim",
+		keys = { { "u" }, { "<C-r>" } },
 		opts = {},
 	},
 	-- better escape from insert mode using j & k
