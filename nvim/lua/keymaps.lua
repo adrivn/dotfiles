@@ -162,8 +162,10 @@ end, { desc = "Substitute from current position to the end of line" })
 vim.keymap.set("x", "S", function()
 	require("substitute").visual()
 end, { desc = "Substitute (visual mode)" })
--- ToggleTerm
-vim.keymap.set({ "n", "t", "i" }, "<A-h>", "<cmd>ToggleTerm<CR>", { silent = true, noremap = true })
+-- Snacks.nvim toggle term
+vim.keymap.set({ "n", "t", "i" }, "<A-h>", function()
+	require("snacks").terminal.toggle()
+end, { silent = true, noremap = true })
 
 -- Trouble and Todo Comments
 vim.keymap.set("n", "<leader>tT", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })

@@ -52,13 +52,17 @@ return {
 			-- patterns = {[[%s/\(\n\n\)\n\+/\1/]]}, -- Only one consecutive bl
 		},
 	},
-	-- { "kdheepak/lazygit.nvim", event = "VeryLazy" },
 	{
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
 		opts = {
 			lazygit = { enabled = true },
+			terminal = { enabled = true },
+			bigfile = { enabled = false },
+			quickfile = { enabled = false },
+			statuscolumn = { enabled = false },
+			words = { enabled = false },
 		},
 	},
 	{ "gbprod/substitute.nvim", opts = {} },
@@ -66,14 +70,6 @@ return {
 		"kylechui/nvim-surround",
 		event = "VeryLazy",
 		opts = {},
-	},
-	{
-		"akinsho/toggleterm.nvim",
-		version = "*",
-		opts = {
-			open_mapping = "<C-\\>",
-			start_in_insert = true,
-		},
 	},
 	{
 		"Wansmer/treesj",
