@@ -107,7 +107,9 @@ vim.keymap.set(
 )
 
 -- Git and stuff
-vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit instance", silent = true, noremap = true })
+vim.keymap.set("n", "<leader>gg", function()
+	require("snacks").lazygit()
+end, { desc = "Open LazyGit instance", silent = true, noremap = true })
 vim.keymap.set("n", "<leader>gb", function()
 	require("gitsigns").blame_line()
 end, { desc = "Gitsigns: Blame line", silent = true, noremap = true })
