@@ -9,7 +9,7 @@ return {
 	-- scrollbar with good stuff
 	{
 		"petertriho/nvim-scrollbar",
-		event = "User BaseFile",
+		event = "BufReadPre",
 		opts = {
 			handlers = {
 				gitsigns = true, -- gitsigns integration (display hunks)
