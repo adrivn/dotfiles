@@ -196,6 +196,11 @@ return {
 				dashboard.button("f", "󰈞  > Find file", ":Telescope find_files<CR>"),
 				dashboard.button("o", "  > Recent Files", ":Telescope oldfiles<CR>"),
 				dashboard.button("p", "  > Recent Projects", ":Telescope projects<CR>"),
+				dashboard.button("l", "  > Lazy (sync)", ":Lazy sync<CR>"),
+				dashboard.button("m", "  > Mason", ":Mason<CR>"),
+				dashboard.button("t", "  > Themes (telescope)", function()
+					require("telescope.builtin").colorscheme({ enable_preview = true, ignore_builtins = true })
+				end),
 				dashboard.button("q", "  > Quit NVIM", ":qa<CR>"),
 			}
 
