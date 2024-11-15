@@ -31,14 +31,6 @@ return {
 		"stevearc/dressing.nvim",
 		opts = {},
 	},
-	-- notify for popups and telescope integration
-	{
-		"rcarriga/nvim-notify",
-		opts = {},
-		init = function()
-			require("telescope").load_extension("notify")
-		end,
-	},
 	-- tree file browser
 	{
 		"nvim-neo-tree/neo-tree.nvim",

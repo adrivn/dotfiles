@@ -52,13 +52,15 @@ return {
 			-- patterns = {[[%s/\(\n\n\)\n\+/\1/]]}, -- Only one consecutive bl
 		},
 	},
-	-- { "kdheepak/lazygit.nvim", event = "VeryLazy" },
 	{
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
 		opts = {
 			lazygit = { enabled = true },
+			statuscolumn = { enabled = true },
+			notifier = { enabled = true },
+			bufdelete = { enabled = true },
 		},
 	},
 	{ "gbprod/substitute.nvim", opts = {} },
