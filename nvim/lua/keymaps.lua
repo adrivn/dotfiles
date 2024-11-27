@@ -159,6 +159,11 @@ vim.keymap.set(
 	require("treesj").join,
 	{ desc = "[P]aragraph [J]oin", silent = true, noremap = true }
 )
+-- surround entire line
+vim.keymap.set("n", "yss", "ys_", { remap = true })
+vim.keymap.set("n", "\\", function()
+	require("mini.files").open()
+end, { silent = true })
 
 -- Substitute
 vim.keymap.set("n", "s", function()
