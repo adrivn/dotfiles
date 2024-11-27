@@ -90,9 +90,6 @@ return {
 				end,
 			},
 			{ "nvim-telescope/telescope-ui-select.nvim" },
-
-			-- Useful for getting pretty icons, but requires a Nerd Font.
-			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
 		},
 		config = function()
 			-- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -459,8 +456,12 @@ return {
 			-- Adds other completion capabilities.
 			--  nvim-cmp does not ship with all sources by default. They are split
 			--  into multiple repos for maintenance purposes.
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-path",
+			-- "hrsh7th/cmp-nvim-lsp",
+			-- "hrsh7th/cmp-path",
+			--* the sources *--
+			{ "iguanacucumber/mag-nvim-lsp", name = "cmp-nvim-lsp", opts = {} },
+			{ "iguanacucumber/mag-nvim-lua", name = "cmp-nvim-lua" },
+			{ "iguanacucumber/mag-buffer", name = "cmp-buffer" },
 		},
 		config = function()
 			-- See `:help cmp`
@@ -493,7 +494,7 @@ return {
 				formatting = {
 					fields = { "kind", "abbr", "menu" },
 					format = function(entry, vim_item)
-						local kind = require("lspkind").cmp_format({
+						local kind = lspkind.cmp_format({
 							mode = "symbol_text",
 							maxwidth = 50,
 							ellipsis_char = "...",
@@ -556,6 +557,7 @@ return {
 				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
+					{ name = "buffer" },
 					{ name = "path" },
 				},
 			})
