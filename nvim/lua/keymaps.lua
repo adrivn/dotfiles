@@ -18,6 +18,15 @@ vim.keymap.set("n", "<A-Down>", ":resize +2<CR>", { desc = "", noremap = true, s
 vim.keymap.set("n", "<A-Left>", ":vertical resize -2<CR>", { desc = "", noremap = true, silent = true })
 vim.keymap.set("n", "<A-Right>", ":vertical resize +2<CR>", { desc = "", noremap = true, silent = true })
 
+-- Join line while keeping the cursor in the same position
+vim.keymap.set("n", "J", "mzJ`z")
+-- Keep cursor centred while scrolling up and down
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+-- Next and previous instance of the highlighted letter
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
