@@ -32,33 +32,7 @@ return {
 		opts = {},
 	},
 	-- tree file browser
-	{
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-			"MunifTanjim/nui.nvim",
-			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-		},
-		cmd = "Neotree",
-		keys = {
-			{ "\\", ":Neotree reveal<CR>", desc = "NeoTree reveal", silent = true },
-		},
-		opts = {
-			window = {
-				width = 30,
-				position = "right",
-			},
-			filesystem = {
-				window = {
-					mappings = {
-						["\\"] = "close_window",
-					},
-				},
-			},
-		},
-	},
+	{ "echasnovski/mini.files", version = false, opts = {} },
 	-- highlight undo
 	{
 		"tzachar/highlight-undo.nvim",
@@ -72,17 +46,22 @@ return {
 	},
 
 	-- autopairs
+	{ "echasnovski/mini.pairs", version = false, opts = {} },
+	-- text objects (awesome plugin)
+	{ "echasnovski/mini.ai", version = false, opts = {} },
+	-- icons
 	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = true,
+		"echasnovski/mini.icons",
+		version = false,
 		opts = {},
-		-- use opts = {} for passing setup options
-		-- this is equivalent to setup({}) function
+		init = function()
+			local mi = require("mini.icons")
+			mi.mock_nvim_web_devicons()
+			mi.tweak_lsp_kind()
+		end,
 	},
-
 	-- bufferline
-	{ "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons", opts = {} },
+	{ "akinsho/bufferline.nvim", version = "*", opts = {} },
 
 	-- lualine
 	{
