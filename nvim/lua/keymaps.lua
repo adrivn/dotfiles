@@ -77,6 +77,14 @@ vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[F]ind [K]eymaps" }
 vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
 vim.keymap.set("n", "<leader>fs", builtin.builtin, { desc = "[F]ind [S]elect Telescope" })
 vim.keymap.set("n", "<leader>fw", builtin.live_grep, { desc = "[F]ind by [W]ord" })
+-- Slightly advanced example of overriding default behavior and theme
+vim.keymap.set("n", "<leader>fW", function()
+	-- You can pass additional configuration to Telescope to change the theme, layout, etc.
+	builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+		winblend = 10,
+		previewer = false,
+	}))
+end, { desc = "[/] Fuzzily search in current buffer" })
 vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
 vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]esume" })
 vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = '[F]ind Recent/[O]ld Files ("." for repeat)' })
@@ -88,17 +96,8 @@ vim.keymap.set("n", "<leader>th", function()
 	})
 end, { desc = "[TH]eme picker" })
 vim.keymap.set("n", "<leader>fn", function()
-	require("telescope").extensions.notify.notify()
+	require("snacks").notifier.show_history()
 end, { desc = "[F]ind in [N]otifications" })
-
--- Slightly advanced example of overriding default behavior and theme
-vim.keymap.set("n", "<leader>/", function()
-	-- You can pass additional configuration to Telescope to change the theme, layout, etc.
-	builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-		winblend = 10,
-		previewer = false,
-	}))
-end, { desc = "[/] Fuzzily search in current buffer" })
 
 -- It's also possible to pass additional configuration options.
 --  See `:help telescope.builtin.live_grep()` for information about particular keys
