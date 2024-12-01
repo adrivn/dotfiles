@@ -10,6 +10,8 @@ vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", { noremap = true, silent = true
 vim.keymap.set("n", "<leader>x", function()
 	require("snacks").bufdelete.delete()
 end, { desc = "Close buffer", noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ov", "<cmd>vs<CR>", { desc = "New vertical split", noremap = true })
+vim.keymap.set("n", "<leader>oh", "<cmd>sp<CR>", { desc = "New horizontal split", noremap = true })
 vim.keymap.set("n", "<leader>b", "<cmd>enew<CR>", { desc = "New buffer", noremap = true, silent = true })
 vim.keymap.set("v", "<", "<gv", { noremap = true, silent = true })
 vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true })
