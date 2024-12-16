@@ -1,0 +1,8 @@
+[tools]
+bat = "latest"
+zig = "latest"
+delta = "latest"
+rg = "latest"
+rust = "latest"
+fd = "latest"
+go = "latest"
