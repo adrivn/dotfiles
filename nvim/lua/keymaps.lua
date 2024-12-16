@@ -147,19 +147,6 @@ vim.keymap.set("n", "<leader>td", function()
 	require("gitsigns").toggle_deleted()
 end, { desc = "Gitsigns: [T]oggle [D]eleted", silent = true, noremap = true })
 
--- TreeSJ
-vim.keymap.set(
-	"n",
-	"<leader>ps",
-	require("treesj").split,
-	{ desc = "[P]aragraph [S]plit", silent = true, noremap = true }
-)
-vim.keymap.set(
-	"n",
-	"<leader>pj",
-	require("treesj").join,
-	{ desc = "[P]aragraph [J]oin", silent = true, noremap = true }
-)
 -- surround entire line
 vim.keymap.set("n", "yss", "ys_", { remap = true })
 vim.keymap.set("n", "\\", function()

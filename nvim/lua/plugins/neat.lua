@@ -59,7 +59,9 @@ return {
 		opts = {
 			lazygit = { enabled = true },
 			statuscolumn = { enabled = true },
-			notifier = { enabled = true },
+			notifier = { enabled = true, timeout = 3000 },
+			indent = { enabled = true },
+			input = { enabled = true },
 			bufdelete = { enabled = true },
 		},
 	},
@@ -80,17 +82,22 @@ return {
 		},
 	},
 	{
+		"echasnovski/mini.splitjoin",
+		version = false,
+		opts = {
+			mappings = {
+				split = "gs",
+				join = "gj",
+			},
+		},
+	},
+	{
 		"akinsho/toggleterm.nvim",
 		version = "*",
 		opts = {
 			open_mapping = "<C-\\>",
 			start_in_insert = true,
 		},
-	},
-	{
-		"Wansmer/treesj",
-		dependencies = { "nvim-treesitter/nvim-treesitter" }, -- if you install parsers with `nvim-treesitter`
-		opts = { use_default_keymaps = false },
 	},
 	{
 		"folke/trouble.nvim",

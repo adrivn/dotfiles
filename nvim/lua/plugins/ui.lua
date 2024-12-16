@@ -1,11 +1,5 @@
 return {
-	{ -- Add indentation guides even on blank lines
-		"lukas-reineke/indent-blankline.nvim",
-		-- Enable `lukas-reineke/indent-blankline.nvim`
-		-- See `:help ibl`
-		main = "ibl",
-		opts = {},
-	},
+
 	-- incline: floating statusline at the top
 	{
 		"b0o/incline.nvim",
@@ -55,11 +49,7 @@ return {
 			},
 		},
 	},
-	-- dressing, to improve the default vim.ui interfaces
-	{
-		"stevearc/dressing.nvim",
-		opts = {},
-	},
+
 	-- tree file browser
 	{ "echasnovski/mini.files", version = false, opts = {} },
 	-- highlight undo
