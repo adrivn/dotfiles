@@ -72,51 +72,61 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
--- See `:help telescope.builtin`
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
-vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[F]ind [K]eymaps" })
-vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
-vim.keymap.set("n", "<leader>fs", builtin.builtin, { desc = "[F]ind [S]elect Telescope" })
-vim.keymap.set("n", "<leader>fw", builtin.live_grep, { desc = "[F]ind by [W]ord" })
+-- See `:help fzf-lua`
+local finder = require("fzf-lua")
+vim.keymap.set("n", "<leader>fh", finder.help_tags, { desc = "[F]ind [H]elp", nowait = true })
+vim.keymap.set("n", "<leader>fk", finder.keymaps, { desc = "[F]ind [K]eymaps", nowait = true })
+vim.keymap.set("n", "<leader>ff", finder.files, { desc = "[F]ind [F]iles", nowait = true })
+vim.keymap.set("n", "<leader>fs", finder.builtin, { desc = "[F]ind [S]elect Builtin fzf Engines", nowait = true })
+vim.keymap.set("n", "<leader>fw", finder.live_grep, { desc = "[F]ind by [w]ord", nowait = true })
 -- Slightly advanced example of overriding default behavior and theme
 vim.keymap.set("n", "<leader>fW", function()
-	-- You can pass additional configuration to Telescope to change the theme, layout, etc.
-	builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-		winblend = 10,
-		previewer = false,
-	}))
-end, { desc = "[/] Fuzzily search in current buffer" })
-vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
-vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]esume" })
-vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = '[F]ind Recent/[O]ld Files ("." for repeat)' })
-vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind existing [B]uffers" })
+	finder.lgrep_curbuf()
+end, { desc = "[W] Fuzzily search in current buffer", nowait = true })
+vim.keymap.set("n", "<leader>fq", finder.quickfix, { desc = "[F]ind [Q]uickfix", nowait = true })
+vim.keymap.set("n", "<leader>fd", finder.diagnostics_workspace, { desc = "[F]ind [D]iagnostics", nowait = true })
+vim.keymap.set("n", "<leader>fr", finder.resume, { desc = "[F]ind [R]esume", nowait = true })
+vim.keymap.set("n", "<leader>fo", finder.oldfiles, { desc = "[F]ind [O]ld Files", nowait = true })
+vim.keymap.set("n", "<leader>fb", finder.buffers, { desc = "[F]ind existing [B]uffers", nowait = true })
 vim.keymap.set("n", "<leader>th", function()
-	builtin.colorscheme({
+	finder.colorschemes({
 		enable_preview = true,
 		ignore_builtins = true,
 	})
-end, { desc = "[TH]eme picker" })
+end, { desc = "[TH]eme picker", nowait = true })
 vim.keymap.set("n", "<leader>fn", function()
 	require("snacks").notifier.show_history()
-end, { desc = "[F]ind in [N]otifications" })
-
--- It's also possible to pass additional configuration options.
---  See `:help telescope.builtin.live_grep()` for information about particular keys
-vim.keymap.set("n", "<leader>f/", function()
-	builtin.live_grep({
-		grep_open_files = true,
-		prompt_title = "Live Grep in Open Files",
-	})
-end, { desc = "[F]ind [/] in Open Files" })
+end, { desc = "[F]ind in [N]otifications", nowait = true })
 
 -- Projects browser
-vim.keymap.set(
-	"n",
-	"<leader>pf",
-	":Telescope projects<CR>",
-	{ desc = "[P]roject [F]inder", silent = true, noremap = true }
-)
+-- 1) first define the logic
+function OpenRecentProjects()
+	local projects = require("project_nvim").get_recent_projects()
+	local project_list = {}
+	for i = 1, #projects do
+		project_list[i] = projects[#projects + 1 - i]
+	end
+	local opts = {
+		prompt = "Projects❯ ",
+		no_multi = false,
+		header_lines = 2,
+		preview_window = "",
+		winopts = {
+			-- preview = "",
+			height = #project_list + 2,
+			width = 0.6,
+			row = 0.4,
+		},
+		actions = {
+			["default"] = function(selected)
+				require("fzf-lua").files({ cwd = selected[1] })
+			end,
+		},
+	}
+	require("fzf-lua").fzf_exec(project_list, opts)
+end
+-- 2) then assign the keymap
+vim.keymap.set("n", "<leader>pf", OpenRecentProjects, { desc = "[P]roject [F]inder", silent = true, noremap = true })
 
 -- Git and stuff
 vim.keymap.set("n", "<leader>gg", function()
@@ -186,7 +196,7 @@ vim.keymap.set(
 )
 vim.keymap.set("n", "<leader>tL", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
 vim.keymap.set("n", "<leader>tq", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
-vim.keymap.set("n", "<leader>tD", "<cmd>TodoTelescope<cr>", { desc = "TodoComments: Telescope view" })
+vim.keymap.set("n", "<leader>tD", "<cmd>TodoFzfLua<cr>", { desc = "TodoComments: fzf view" })
 
 function _G.set_terminal_keymaps()
 	local opts = { buffer = 0 }

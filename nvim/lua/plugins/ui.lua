@@ -44,6 +44,9 @@ return {
 				"cmp_menu",
 				"noice",
 				"prompt",
+				"dropbar_menu",
+				"dropbar_menu_fzf",
+				"fzf-lua",
 				"TelescopePrompt",
 				"alpha",
 			},
@@ -187,13 +190,15 @@ return {
 			-- Set menu
 			dashboard.section.buttons.val = {
 				dashboard.button("e", "  > New file", ":ene <BAR> startinsert <CR>"),
-				dashboard.button("f", "󰈞  > Find file", ":Telescope find_files<CR>"),
-				dashboard.button("o", "  > Recent Files", ":Telescope oldfiles<CR>"),
-				dashboard.button("p", "  > Recent Projects", ":Telescope projects<CR>"),
-				dashboard.button("l", "  > Lazy (sync)", ":Lazy sync<CR>"),
-				dashboard.button("m", "  > Mason", ":Mason<CR>"),
-				dashboard.button("t", "  > Themes (telescope)", function()
-					require("telescope.builtin").colorscheme({ enable_preview = true, ignore_builtins = true })
+				dashboard.button("f", "󰈞  > Find file", function()
+					require("fzf-lua").files({ cwd = vim.fn.getcwd() })
+				end),
+				dashboard.button("o", "󰔟  > Recent Files", ":FzfLua oldfiles<CR>"),
+				dashboard.button("p", "  > Recent Projects", ":lua OpenRecentProjects()<CR>"),
+				dashboard.button("l", "  > Lazy (sync)", ":Lazy sync<CR>"),
+				dashboard.button("m", "  > Mason", ":Mason<CR>"),
+				dashboard.button("t", "  > Themes (fzflua)", function()
+					require("fzf-lua").colorschemes({ enable_preview = true, ignore_builtins = true })
 				end),
 				dashboard.button("q", "  > Quit NVIM", ":qa<CR>"),
 			}

@@ -3,11 +3,9 @@ return {
 	-- https://github.com/ahmedkhalf/project.nvim
 	{
 		"zeioth/project.nvim",
-		event = "User BaseDefered",
+		-- event = "User BaseDefered",
+		event = "VeryLazy",
 		cmd = "ProjectRoot",
-		init = function()
-			require("telescope").load_extension("projects")
-		end,
 		opts = {
 			-- How to find root directory
 			patterns = {
