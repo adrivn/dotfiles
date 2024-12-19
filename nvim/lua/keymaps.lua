@@ -138,9 +138,8 @@ function OpenRecentProjects()
 			end,
 		},
 		winopts = {
-			-- preview = "",
-			height = #project_list + 2,
-			width = 0.6,
+			height = 0.6,
+			width = 0.8,
 			row = 0.4,
 		},
 		actions = {
