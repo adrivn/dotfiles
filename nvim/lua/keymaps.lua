@@ -110,7 +110,33 @@ function OpenRecentProjects()
 		prompt = "Projects❯ ",
 		no_multi = false,
 		header_lines = 2,
-		preview_window = "",
+		preview = {
+			field_index = "{+}",
+			title = "Files inside:",
+			fn = function(path)
+				local files = {}
+				-- Use vim.loop.fs_scandir to iterate over directory entries
+				local handle = vim.loop.fs_scandir(path[1])
+				if not handle then
+					return nil, "Unable to open directory: " .. path[1]
+				end
+
+				while true do
+					local name, type = vim.loop.fs_scandir_next(handle)
+					local icon = "·"
+					if not name then
+						break
+					end
+					-- Include only files (not directories)
+					if type == "directory" then
+						icon = "󰉋"
+					end
+					table.insert(files, icon .. "  " .. name)
+				end
+
+				return files
+			end,
+		},
 		winopts = {
 			-- preview = "",
 			height = #project_list + 2,
