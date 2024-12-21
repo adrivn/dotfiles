@@ -5,11 +5,12 @@ fish_add_path -m ~/.local/bin
 # mise
 mise activate fish | source
 # Add atuin
-source $HOME/.atuin/bin/env.fish
+# source $HOME/.atuin/bin/env.fish
 
 # fdfind may not need to be renamed, only in ubuntu, ignore for now
 alias cat="bat"
 alias lsd="eza --long --header --git --icons"
+alias lst="eza --tree --long --header --git --icons --level=2"
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
