@@ -103,9 +103,6 @@ return {
 						scrollbar = true,
 					},
 				},
-				ghost_text = {
-					enabled = true,
-				},
 				menu = {
 					border = "rounded",
 					winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",

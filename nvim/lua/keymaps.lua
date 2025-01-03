@@ -107,7 +107,7 @@ function OpenRecentProjects()
 		project_list[i] = projects[#projects + 1 - i]
 	end
 	local opts = {
-		prompt = "Projects❯ ",
+		prompt = "Projects ❯ ",
 		no_multi = false,
 		header_lines = 2,
 		preview = {
@@ -123,14 +123,10 @@ function OpenRecentProjects()
 
 				while true do
 					local name, type = vim.loop.fs_scandir_next(handle)
-					local icon = "·"
 					if not name then
 						break
 					end
-					-- Include only files (not directories)
-					if type == "directory" then
-						icon = "󰉋"
-					end
+					local icon, _, _ = require("mini.icons").get(type, name)
 					table.insert(files, icon .. "  " .. name)
 				end
 
