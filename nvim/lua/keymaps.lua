@@ -140,7 +140,9 @@ function OpenRecentProjects()
 		},
 		actions = {
 			["default"] = function(selected)
-				require("fzf-lua").files({ cwd = selected[1] })
+				local chosen_dir = selected[1]
+				vim.fn.chdir(chosen_dir)
+				require("fzf-lua").files({ cwd = chosen_dir })
 			end,
 		},
 	}
