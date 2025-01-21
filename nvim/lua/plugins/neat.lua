@@ -3,7 +3,7 @@ return {
 	-- https://github.com/ahmedkhalf/project.nvim
 	{
 		"zeioth/project.nvim",
-		-- event = "User BaseDefered",
+		priority = 100,
 		event = "VeryLazy",
 		cmd = "ProjectRoot",
 		opts = {

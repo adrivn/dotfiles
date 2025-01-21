@@ -12,6 +12,38 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+-- Auto resize splits when the terminal's window is resized
+vim.api.nvim_create_autocmd("VimResized", {
+	command = "wincmd =",
+})
+
+-- Restore cursor to file position in previous editing session
+vim.api.nvim_create_autocmd("BufReadPost", {
+	callback = function(args)
+		local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
+		local line_count = vim.api.nvim_buf_line_count(args.buf)
+		if mark[1] > 0 and mark[1] <= line_count then
+			vim.cmd('normal! g`"zz')
+		end
+	end,
+})
+
+-- Set local settings for terminal buffers
+vim.api.nvim_create_autocmd("TermOpen", {
+	pattern = "term://*",
+	callback = function()
+		if vim.opt.buftype:get() == "terminal" then
+			local set = vim.opt_local
+			set.number = false -- Don't show numbers
+			set.relativenumber = false -- Don't show relativenumbers
+			set.scrolloff = 0 -- Don't scroll when at the top or bottom of the terminal buffer
+			vim.opt.filetype = "terminal"
+
+			vim.cmd.startinsert() -- Start in insert mode
+		end
+	end,
+})
+
 -- Disable folding and status line on alpha buffer
 vim.cmd([[ autocmd FileType alpha setlocal nofoldenable ]])
 vim.api.nvim_create_autocmd({ "User", "BufEnter" }, {
