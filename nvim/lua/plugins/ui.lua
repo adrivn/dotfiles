@@ -46,7 +46,6 @@ return {
 				"prompt",
 				"dropbar_menu",
 				"dropbar_menu_fzf",
-				"fzf-lua",
 				"TelescopePrompt",
 				"alpha",
 			},
@@ -191,14 +190,18 @@ return {
 			dashboard.section.buttons.val = {
 				dashboard.button("e", "  > New file", ":ene <BAR> startinsert <CR>"),
 				dashboard.button("f", "󰈞  > Find file", function()
-					require("fzf-lua").files({ cwd = vim.fn.getcwd() })
+					require("snacks").picker.files({ cwd = vim.fn.getcwd() })
 				end),
-				dashboard.button("o", "󰔟  > Recent Files", ":FzfLua oldfiles<CR>"),
-				dashboard.button("p", "  > Recent Projects", ":lua OpenRecentProjects()<CR>"),
+				dashboard.button("o", "󰔟  > Recent Files", function()
+					require("snacks").picker.recent()
+				end),
+				dashboard.button("p", "  > Recent Projects", function()
+					require("snacks").picker.projects()
+				end),
 				dashboard.button("l", "  > Lazy (sync)", ":Lazy sync<CR>"),
 				dashboard.button("m", "  > Mason", ":Mason<CR>"),
-				dashboard.button("t", "  > Themes (fzflua)", function()
-					require("fzf-lua").colorschemes({ enable_preview = true, ignore_builtins = true })
+				dashboard.button("t", "  > Themes", function()
+					require("snacks").picker.colorschemes({ enable_preview = true, ignore_builtins = true })
 				end),
 				dashboard.button("q", "  > Quit NVIM", ":qa<CR>"),
 			}

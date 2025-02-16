@@ -55,8 +55,10 @@ return {
 		priority = 1000,
 		lazy = false,
 		opts = {
+			picker = { enabled = true },
 			lazygit = { enabled = true },
 			statuscolumn = { enabled = true },
+			terminal = { enabled = true },
 			notifier = { enabled = true, timeout = 3000 },
 			indent = { enabled = true },
 			input = { enabled = true },
