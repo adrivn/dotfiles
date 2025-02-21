@@ -73,20 +73,21 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower win
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- See `:help fzf-lua`
-local finder = require("fzf-lua")
-vim.keymap.set("n", "<leader>fh", finder.help_tags, { desc = "[F]ind [H]elp", nowait = true })
+local finder = require("snacks").picker
+-- local finder = require("fzf-lua")
+vim.keymap.set("n", "<leader>fh", finder.help, { desc = "[F]ind [H]elp", nowait = true })
 vim.keymap.set("n", "<leader>fk", finder.keymaps, { desc = "[F]ind [K]eymaps", nowait = true })
 vim.keymap.set("n", "<leader>ff", finder.files, { desc = "[F]ind [F]iles", nowait = true })
-vim.keymap.set("n", "<leader>fs", finder.builtin, { desc = "[F]ind [S]elect Builtin fzf Engines", nowait = true })
-vim.keymap.set("n", "<leader>fw", finder.live_grep, { desc = "[F]ind by [w]ord", nowait = true })
+vim.keymap.set("n", "<leader>fs", finder.pickers, { desc = "[F]ind [S]elect Builtin fzf Engines", nowait = true })
+vim.keymap.set("n", "<leader>fw", finder.grep, { desc = "[F]ind by [w]ord", nowait = true })
 -- Slightly advanced example of overriding default behavior and theme
 vim.keymap.set("n", "<leader>fW", function()
-	finder.lgrep_curbuf()
+	finder.grep_buffers()
 end, { desc = "[W] Fuzzily search in current buffer", nowait = true })
-vim.keymap.set("n", "<leader>fq", finder.quickfix, { desc = "[F]ind [Q]uickfix", nowait = true })
-vim.keymap.set("n", "<leader>fd", finder.diagnostics_workspace, { desc = "[F]ind [D]iagnostics", nowait = true })
+vim.keymap.set("n", "<leader>fq", finder.qflist, { desc = "[F]ind [Q]uickfix", nowait = true })
+vim.keymap.set("n", "<leader>fd", finder.diagnostics, { desc = "[F]ind [D]iagnostics", nowait = true })
 vim.keymap.set("n", "<leader>fr", finder.resume, { desc = "[F]ind [R]esume", nowait = true })
-vim.keymap.set("n", "<leader>fo", finder.oldfiles, { desc = "[F]ind [O]ld Files", nowait = true })
+vim.keymap.set("n", "<leader>fo", finder.recent, { desc = "[F]ind [O]ld Files", nowait = true })
 vim.keymap.set("n", "<leader>fb", finder.buffers, { desc = "[F]ind existing [B]uffers", nowait = true })
 vim.keymap.set("n", "<leader>th", function()
 	finder.colorschemes({
@@ -97,59 +98,7 @@ end, { desc = "[TH]eme picker", nowait = true })
 vim.keymap.set("n", "<leader>fn", function()
 	require("snacks").notifier.show_history()
 end, { desc = "[F]ind in [N]otifications", nowait = true })
-
--- Projects browser
--- 1) first define the logic
-function OpenRecentProjects()
-	local projects = require("project_nvim").get_recent_projects()
-	local project_list = {}
-	for i = 1, #projects do
-		project_list[i] = projects[#projects + 1 - i]
-	end
-	local opts = {
-		prompt = "Projects ❯ ",
-		no_multi = false,
-		header_lines = 2,
-		preview = {
-			field_index = "{+}",
-			title = "Files inside:",
-			fn = function(path)
-				local files = {}
-				-- Use vim.loop.fs_scandir to iterate over directory entries
-				local handle = vim.loop.fs_scandir(path[1])
-				if not handle then
-					return nil, "Unable to open directory: " .. path[1]
-				end
-
-				while true do
-					local name, type = vim.loop.fs_scandir_next(handle)
-					if not name then
-						break
-					end
-					local icon, _, _ = require("mini.icons").get(type, name)
-					table.insert(files, icon .. "  " .. name)
-				end
-
-				return files
-			end,
-		},
-		winopts = {
-			height = 0.6,
-			width = 0.8,
-			row = 0.4,
-		},
-		actions = {
-			["default"] = function(selected)
-				local chosen_dir = selected[1]
-				vim.fn.chdir(chosen_dir)
-				require("fzf-lua").files({ cwd = chosen_dir })
-			end,
-		},
-	}
-	require("fzf-lua").fzf_exec(project_list, opts)
-end
--- 2) then assign the keymap
-vim.keymap.set("n", "<leader>pf", OpenRecentProjects, { desc = "[P]roject [F]inder", silent = true, noremap = true })
+vim.keymap.set("n", "<leader>pf", finder.projects, { desc = "[P]roject [F]inder", silent = true, noremap = true })
 
 -- Git and stuff
 vim.keymap.set("n", "<leader>gg", function()
@@ -219,7 +168,9 @@ vim.keymap.set(
 )
 vim.keymap.set("n", "<leader>tL", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
 vim.keymap.set("n", "<leader>tq", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
-vim.keymap.set("n", "<leader>tD", "<cmd>TodoFzfLua<cr>", { desc = "TodoComments: fzf view" })
+vim.keymap.set("n", "<leader>tD", function()
+	require("snacks").picker.todo_comments()
+end, { desc = "TodoComments: fzf view" })
 
 function _G.set_terminal_keymaps()
 	local opts = { buffer = 0 }
