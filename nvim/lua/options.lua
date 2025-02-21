@@ -1,3 +1,4 @@
+-- General Options
 vim.wo.number = true -- Make line numbers default (default: false)
 vim.o.relativenumber = true -- Set relative numbered lines (default: false)
 vim.schedule(function()
@@ -79,6 +80,8 @@ vim.opt.wildignore:append({
 	"zaibatsu.vim",
 	"zellner.vim",
 })
+
+-- Powershell opts for running under Windows
 local is_win32 = vim.fn.has("win32")
 if is_win32 == 1 then
 	local powershell_options = {
