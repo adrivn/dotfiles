@@ -69,11 +69,6 @@ return {
 			},
 		},
 	},
-	-- better fuzzy finder (fzf-lua)
-	{
-		"ibhagwan/fzf-lua",
-		opts = {},
-	},
 	{ -- LSP Configuration & Plugins
 		"neovim/nvim-lspconfig",
 		dependencies = {

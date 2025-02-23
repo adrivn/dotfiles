@@ -72,9 +72,7 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
--- See `:help fzf-lua`
 local finder = require("snacks").picker
--- local finder = require("fzf-lua")
 vim.keymap.set("n", "<leader>fh", finder.help, { desc = "[F]ind [H]elp", nowait = true })
 vim.keymap.set("n", "<leader>fk", finder.keymaps, { desc = "[F]ind [K]eymaps", nowait = true })
 vim.keymap.set("n", "<leader>ff", finder.files, { desc = "[F]ind [F]iles", nowait = true })
