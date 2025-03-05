@@ -55,6 +55,68 @@ return {
 		priority = 1000,
 		lazy = false,
 		opts = {
+			dashboard = {
+				enabled = true,
+				preset = {
+					keys = {
+						{ key = "e", icon = " ", desc = "new file", action = ":ene <bar> startinsert <cr>" },
+						{
+							key = "f",
+							icon = "󰈞 ",
+							desc = "find file",
+							action = function()
+								require("snacks").picker.files({ cwd = vim.fn.getcwd() })
+							end,
+						},
+						{
+							key = "o",
+							icon = "󰔟 ",
+							desc = "recent files",
+							action = function()
+								require("snacks").picker.recent()
+							end,
+						},
+						{
+							key = "p",
+							icon = " ",
+							desc = "recent projects",
+							action = function()
+								require("snacks").picker.projects()
+							end,
+						},
+						{ key = "l", icon = " ", desc = "lazy (sync)", action = ":Lazy sync" },
+						{ key = "m", icon = " ", desc = "mason", action = ":Mason" },
+						{
+							key = "t",
+							icon = " ",
+							desc = "themes",
+							action = function()
+								require("snacks").picker.colorschemes({ enable_preview = true, ignore_builtins = true })
+							end,
+						},
+						{ key = "q", icon = " ", desc = "quit nvim", action = ":qa" },
+					},
+					-- Used by the `header` section
+					header = {
+						[[
+                                ▀████▀▄▄              ▄█
+						            █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█
+						    ▄        █          ▀▀▀▀▄  ▄▀
+						   ▄▀ ▀▄      ▀▄              ▀▄▀
+						  ▄▀    █     █▀   ▄█▀▄      ▄█
+						  ▀▄     ▀▄  █     ▀██▀     ██▄█
+						   ▀▄    ▄▀ █   ▄██▄   ▄  ▄  ▀▀ █
+						    █  ▄▀  █    ▀██▀    ▀▀ ▀▀  ▄▀
+						   █   █  █      ▄▄           ▄▀
+                       ]],
+					},
+				},
+				sections = {
+					{ section = "header" },
+					{ section = "keys", gap = 1, padding = 1 },
+					{ section = "startup" },
+				},
+			},
 			picker = { enabled = true },
 			lazygit = { enabled = true },
 			statuscolumn = { enabled = true },
