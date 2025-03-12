@@ -51,6 +51,16 @@ return {
 		},
 	},
 	{
+		"sindrets/diffview.nvim",
+		opts = {
+			keymaps = {
+				view = {
+					{ "n", "q", ":DiffviewClose<CR>", { desc = "Close diff view" } },
+				},
+			},
+		},
+	},
+	{
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
@@ -59,7 +69,7 @@ return {
 				enabled = true,
 				preset = {
 					keys = {
-						{ key = "e", icon = " ", desc = "new file", action = ":ene <bar> startinsert <cr>" },
+						{ key = "e", icon = " ", desc = "new file", action = ":ene" },
 						{
 							key = "f",
 							icon = "󰈞 ",

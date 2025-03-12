@@ -1,3 +1,6 @@
+-- New Diff Options
+vim.opt.diffopt = "internal,filler,context:12,closeoff,indent-heuristic,linematch:200,algorithm:histogram"
+
 -- General Options
 vim.wo.number = true -- Make line numbers default (default: false)
 vim.o.relativenumber = true -- Set relative numbered lines (default: false)
