@@ -1,11 +1,14 @@
 -- New Diff Options
 vim.opt.diffopt = "internal,filler,context:12,closeoff,indent-heuristic,linematch:200,algorithm:histogram"
 
+-- New border options
+vim.o.winborder = "rounded"
+
 -- General Options
 vim.wo.number = true -- Make line numbers default (default: false)
 vim.o.relativenumber = true -- Set relative numbered lines (default: false)
 vim.schedule(function()
-	vim.opt.clipboard = "unnamedplus"
+	vim.o.clipboard = "unnamedplus"
 end) -- Sync clipboard between OS and Neovim. (default: '')
 vim.o.wrap = false -- Display lines as one long line (default: true)
 vim.o.linebreak = true -- Companion to wrap, don't split words (default: false)
@@ -23,7 +26,7 @@ vim.o.cursorline = false -- Highlight the current line (default: false)
 vim.o.splitbelow = true -- Force all horizontal splits to go below current window (default: false)
 vim.o.splitright = true -- Force all vertical splits to go to the right of current window (default: false)
 vim.o.showmode = false -- We don't need to see things like -- INSERT -- anymore (default: true)
-vim.opt.termguicolors = true -- Set termguicolors to enable highlight groups (default: false)
+vim.o.termguicolors = true -- Set termguicolors to enable highlight groups (default: false)
 vim.o.whichwrap = "bs<>[]hl" -- Which "horizontal" keys are allowed to travel to prev/next line (default: 'b,s')
 vim.o.numberwidth = 4 -- Set number column width to 2 {default 4} (default: 4)
 vim.o.swapfile = false -- Creates a swapfile (default: true)
@@ -51,10 +54,10 @@ vim.opt.runtimepath:remove("/usr/share/vim/vimfiles") -- Separate Vim plugins fr
 vim.g.have_nerd_font = true
 
 -- Preview substitutions live, as you type!
-vim.opt.inccommand = "split"
+vim.o.inccommand = "split"
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
-vim.opt.hlsearch = true
+vim.o.hlsearch = true
 
 -- Ignore default color schemes
 vim.opt.wildignore:append({
@@ -97,6 +100,6 @@ if is_win32 == 1 then
 	}
 
 	for option, value in pairs(powershell_options) do
-		vim.opt[option] = value
+		vim.o[option] = value
 	end
 end
