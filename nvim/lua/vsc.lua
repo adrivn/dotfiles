@@ -21,6 +21,14 @@ vim.keymap.set("v", ">", ">gv", opts)
 -- better search results navigation
 vim.keymap.set("n", "n", "nzz", opts)
 vim.keymap.set("n", "N", "Nzz", opts)
+-- Join line while keeping the cursor in the same position
+vim.keymap.set("n", "J", "mzJ`z")
+-- Keep cursor centred while scrolling up and down
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+-- Next and previous instance of the highlighted letter
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
 -- browse editors as buffers
 vim.keymap.set(
 	"n",
