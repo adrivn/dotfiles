@@ -53,7 +53,7 @@ return {
 	},
 
 	-- tree file browser
-	{ "echasnovski/mini.files", version = false, opts = {} },
+	{ "nvim-mini/mini.files", version = false, opts = {} },
 	-- highlight undo
 	{
 		"tzachar/highlight-undo.nvim",
@@ -67,12 +67,12 @@ return {
 	},
 
 	-- autopairs
-	{ "echasnovski/mini.pairs", version = false, opts = {} },
+	{ "nvim-mini/mini.pairs", version = false, opts = {} },
 	-- text objects (awesome plugin)
-	{ "echasnovski/mini.ai", version = false, opts = {} },
+	{ "nvim-mini/mini.ai", version = false, opts = {} },
 	-- icons
 	{
-		"echasnovski/mini.icons",
+		"nvim-mini/mini.icons",
 		version = false,
 		opts = {},
 		init = function()

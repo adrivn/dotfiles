@@ -102,7 +102,7 @@ return {
 	},
 	{ "gbprod/substitute.nvim", opts = {} },
 	{
-		"echasnovski/mini.surround",
+		"nvim-mini/mini.surround",
 		version = false,
 		opts = {
 			mappings = {
@@ -117,7 +117,7 @@ return {
 		},
 	},
 	{
-		"echasnovski/mini.splitjoin",
+		"nvim-mini/mini.splitjoin",
 		version = false,
 		opts = {
 			mappings = {
