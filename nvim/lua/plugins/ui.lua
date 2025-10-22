@@ -35,7 +35,6 @@ return {
 		event = "BufReadPre",
 		opts = {
 			handlers = {
-				gitsigns = true, -- gitsigns integration (display hunks)
 				ale = true, -- lsp integration (display errors/warnings)
 				search = false, -- hlslens integration (display search result)
 			},
@@ -51,7 +50,17 @@ return {
 			},
 		},
 	},
-
+	-- git differences
+	{
+		"nvim-mini/mini.diff",
+		version = false,
+		opts = {
+			view = {
+				style = "sign",
+				-- signs = { add = "▕", change = "▕", delete = "▕" },
+			},
+		},
+	},
 	-- tree file browser
 	{ "nvim-mini/mini.files", version = false, opts = {} },
 	-- highlight undo
@@ -67,7 +76,7 @@ return {
 	},
 
 	-- autopairs
-	{ "nvim-mini/mini.pairs", version = false, opts = {} },
+	{ "nvim-mini/mini.pairs", version = false, opts = { modes = { command = true } } },
 	-- text objects (awesome plugin)
 	{ "nvim-mini/mini.ai", version = false, opts = {} },
 	-- icons

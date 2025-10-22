@@ -1,3 +1,85 @@
+-- An example helper to create a Normal mode mapping
+local nmap = function(lhs, rhs, desc)
+	-- See `:h vim.keymap.set()`
+	vim.keymap.set("n", lhs, rhs, { desc = desc })
+end
+local nmap_leader = function(suffix, rhs, desc)
+	vim.keymap.set("n", "<Leader>" .. suffix, rhs, { desc = desc })
+end
+local xmap_leader = function(suffix, rhs, desc)
+	vim.keymap.set("x", "<Leader>" .. suffix, rhs, { desc = desc })
+end
+
+local leader_group_clues = {
+	{ mode = "n", keys = "<Leader>b", desc = "+Buffer" },
+	{ mode = "n", keys = "<Leader>e", desc = "+Explore/Edit" },
+	{ mode = "n", keys = "<Leader>f", desc = "+Find" },
+	{ mode = "n", keys = "<Leader>g", desc = "+Git" },
+	{ mode = "n", keys = "<Leader>l", desc = "+Language" },
+	{ mode = "n", keys = "<Leader>m", desc = "+Map" },
+	{ mode = "n", keys = "<Leader>o", desc = "+Other" },
+	{ mode = "n", keys = "<Leader>s", desc = "+Session" },
+	{ mode = "n", keys = "<Leader>t", desc = "+Terminal" },
+	{ mode = "n", keys = "<Leader>v", desc = "+Visits" },
+
+	{ mode = "x", keys = "<Leader>g", desc = "+Git" },
+	{ mode = "x", keys = "<Leader>l", desc = "+Language" },
+}
+
+local ConfigClues = function()
+	local miniclue = require("mini.clue")
+              -- stylua: ignore
+              miniclue.setup({
+                -- Define which clues to show. By default shows only clues for custom mappings
+                -- (uses `desc` field from the mapping; takes precedence over custom clue).
+                clues = {
+                  -- This is defined in 'plugin/20_keymaps.lua' with Leader group descriptions
+                  leader_group_clues,
+                  miniclue.gen_clues.builtin_completion(),
+                  miniclue.gen_clues.g(),
+                  miniclue.gen_clues.marks(),
+                  miniclue.gen_clues.registers(),
+                  -- This creates a submode for window resize mappings. Try the following:
+                  -- - Press `<C-w>s` to make a window split.
+                  -- - Press `<C-w>+` to increase height. Clue window still shows clues as if
+                  --   `<C-w>` is pressed again. Keep pressing just `+` to increase height.
+                  --   Try pressing `-` to decrease height.
+                  -- - Stop submode either by `<Esc>` or by any key that is not in submode.
+                  miniclue.gen_clues.windows({ submode_resize = true }),
+                  miniclue.gen_clues.z(),
+                },
+                -- Explicitly opt-in for set of common keys to trigger clue window
+                triggers = {
+                  { mode = 'n', keys = '<Leader>' }, -- Leader triggers
+                  { mode = 'x', keys = '<Leader>' },
+                  { mode = 'n', keys = '\\' },       -- mini.basics
+                  { mode = 'n', keys = '[' },        -- mini.bracketed
+                  { mode = 'n', keys = ']' },
+                  { mode = 'x', keys = '[' },
+                  { mode = 'x', keys = ']' },
+                  { mode = 'i', keys = '<C-x>' },    -- Built-in completion
+                  { mode = 'n', keys = 'g' },        -- `g` key
+                  { mode = 'x', keys = 'g' },
+                  { mode = 'n', keys = "'" },        -- Marks
+                  { mode = 'n', keys = '`' },
+                  { mode = 'x', keys = "'" },
+                  { mode = 'x', keys = '`' },
+                  { mode = 'n', keys = '"' },        -- Registers
+                  { mode = 'x', keys = '"' },
+                  { mode = 'i', keys = '<C-r>' },
+                  { mode = 'c', keys = '<C-r>' },
+                  { mode = 'n', keys = '<C-w>' },    -- Window commands
+                  { mode = 'n', keys = 'z' },        -- `z` key
+                  { mode = 'x', keys = 'z' },
+                },
+                window = {
+                        delay = 500,
+                },
+              })
+end
+
+ConfigClues()
+
 -- [[ Basic Keymaps ]]
 vim.keymap.set("n", ";", ":", { desc = "Remap semicolon, for the butter fingers" })
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
@@ -40,22 +122,6 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }
 -- Toggle line number and relative line number
 vim.keymap.set("n", "<leader>tn", "<cmd>echo 'Not yet!'<CR>", { desc = "[T]oggle line [N]umber" })
 vim.keymap.set("n", "<leader>tr", "<cmd>echo 'Not yet!'<CR>", { desc = "[T]oggle [R]elative line number" })
-
--- hop.nvim
-local hop = require("hop")
-local directions = require("hop.hint").HintDirection
-vim.keymap.set("", "f", function()
-	hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
-end, { remap = true })
-vim.keymap.set("", "F", function()
-	hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
-end, { remap = true })
-vim.keymap.set("", "t", function()
-	hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false, hint_offset = -1 })
-end, { remap = true })
-vim.keymap.set("", "T", function()
-	hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false, hint_offset = 1 })
-end, { remap = true })
 
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
@@ -102,34 +168,9 @@ vim.keymap.set("n", "<leader>pf", finder.projects, { desc = "[P]roject [F]inder"
 vim.keymap.set("n", "<leader>gg", function()
 	require("snacks").lazygit()
 end, { desc = "Open LazyGit instance", silent = true, noremap = true })
-vim.keymap.set("n", "<leader>gb", function()
-	require("gitsigns").blame_line()
-end, { desc = "Gitsigns: Blame line", silent = true, noremap = true })
-vim.keymap.set("n", "<leader>gB", function()
-	require("gitsigns").blame()
-end, { desc = "Gitsigns: Blame entire file", silent = true, noremap = true })
-vim.keymap.set("n", "<leader>gp", function()
-	require("gitsigns").preview_hunk()
-end, { desc = "Gitsigns: Preview Hunk", silent = true, noremap = true })
-vim.keymap.set("n", "ghp", function()
-	require("gitsigns").prev_hunk()
-end, { desc = "Gitsigns: Go to previous hunk", silent = true, noremap = true })
-vim.keymap.set("n", "ghn", function()
-	require("gitsigns").next_hunk()
-end, { desc = "Gitsigns: Go to next hunk", silent = true, noremap = true })
-vim.keymap.set("n", "<leader>tb", function()
-	require("gitsigns").toggle_current_line_blame()
-end, { desc = "Gitsigns: Toggle Line Blame", silent = true, noremap = true })
-vim.keymap.set("n", "<leader>gd", ":DiffviewOpen<CR>", { desc = "Diffview: Open", silent = true, noremap = true })
-vim.keymap.set(
-	"n",
-	"<leader>gh",
-	":DiffviewFileHistory<CR>",
-	{ desc = "Diffview: File history", silent = true, noremap = true }
-)
-vim.keymap.set("n", "<leader>td", function()
-	require("gitsigns").toggle_deleted()
-end, { desc = "Gitsigns: [T]oggle [D]eleted", silent = true, noremap = true })
+vim.keymap.set("n", "<leader>gt", function()
+	MiniDiff.toggle_overlay()
+end, { desc = "Git: [T]oggle Diff", silent = true, noremap = true })
 
 -- surround entire line
 vim.keymap.set("n", "yss", "ys_", { remap = true })

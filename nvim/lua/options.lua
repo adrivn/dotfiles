@@ -1,5 +1,15 @@
+-- General ====================================================================
+vim.o.shada = "'100,<50,s10,:1000,/100,@100,h" -- Limit ShaDa file (for startup)
+
 -- New Diff Options
 vim.opt.diffopt = "internal,filler,context:12,closeoff,indent-heuristic,linematch:200,algorithm:histogram"
+
+-- UI =========================================================================
+vim.o.pumheight = 10 -- Make popup menu smaller
+-- LSP autocompletion
+vim.o.pumborder = "rounded"
+vim.api.nvim_set_hl(0, "Pmenu", { bg = "NONE" })
+vim.api.nvim_set_hl(0, "PmenuBorder", { bg = "NONE", fg = "#CC6600" })
 
 -- New border options
 vim.o.winborder = "rounded"
@@ -33,9 +43,10 @@ vim.o.swapfile = false -- Creates a swapfile (default: true)
 vim.o.smartindent = true -- Make indenting smarter again (default: false)
 vim.o.showtabline = 2 -- Always show tabs (default: 1)
 vim.o.backspace = "indent,eol,start" -- Allow backspace on (default: 'indent,eol,start')
-vim.o.pumheight = 10 -- Pop up menu height (default: 0)
 vim.o.conceallevel = 0 -- So that `` is visible in markdown files (default: 1)
 vim.wo.signcolumn = "yes" -- Keep signcolumn on by default (default: 'auto')
+-- vim.wo.statuscolumn = "%l%s" -- Keep signcolumn on by default (default: 'auto')
+vim.wo.statuscolumn = "%=%{v:virtnum < 1 ? (v:relnum ? v:relnum : v:lnum < 10 ? v:lnum . '  ' : v:lnum) : ''}%=%s"
 vim.o.fileencoding = "utf-8" -- The encoding written to a file (default: 'utf-8')
 vim.o.cmdheight = 1 -- More space in the Neovim command line for displaying messages (default: 1)
 vim.o.breakindent = true -- Enable break indent (default: false)
@@ -43,8 +54,9 @@ vim.o.updatetime = 250 -- Decrease update time (default: 4000)
 vim.o.timeoutlen = 300 -- Time to wait for a mapped sequence to complete (in milliseconds) (default: 1000)
 vim.o.backup = false -- Creates a backup file (default: false)
 vim.o.writebackup = false -- If a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited (default: true)
--- vim.o.undofile = true -- Save undo history (default: false)
-vim.o.completeopt = "menuone,noselect" -- Set completeopt to have a better completion experience (default: 'menu,preview')
+-- vim.o.undofile = true -- Save undo history / enable persistent undo (default: false)
+vim.o.complete = ".,w,b,kspell" -- Use less sources
+vim.o.completeopt = "menuone,noselect,fuzzy,nosort" -- Set completeopt to have a better completion experience (default: 'menu,preview')
 vim.opt.shortmess:append("c") -- Don't give |ins-completion-menu| messages (default: does not include 'c')
 vim.opt.iskeyword:append("-") -- Hyphenated words recognized by searches (default: does not include '-')
 vim.opt.formatoptions:remove({ "c", "r", "o" }) -- Don't insert the current comment leader automatically for auto-wrapping comments using 'textwidth', hitting <Enter> in insert mode, or hitting 'o' or 'O' in normal mode. (default: 'croql')
