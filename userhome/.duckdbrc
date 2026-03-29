@@ -1,0 +1,8 @@
+INSTALL spatial;
+LOAD spatial;
+INSTALL h3 FROM community;
+LOAD h3;
+INSTALL httpfs;
+LOAD httpfs;
+
+.timer on
