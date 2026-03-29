@@ -1,6 +1,5 @@
 -- You can add your own plugins here or in other files in this directory!
 --  I promise not to create any merge conflicts in this directory :)
---
 -- See the kickstart.nvim README for more information
 return {
 	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -15,59 +14,65 @@ return {
 		cmd = { "HopWord" },
 		opts = { keys = "etovxqpdygfblzhckisuran" },
 	},
-
-	{ -- Useful plugin to show you pending keybinds.
-		"folke/which-key.nvim",
-		event = "VimEnter", -- Sets the loading event to 'VimEnter'
-		opts = {
-			icons = {
-				-- set icon mappings to true if you have a Nerd Font
-				mappings = vim.g.have_nerd_font,
-				-- If you are using a Nerd Font: set icons.keys to an empty table which will use the
-				-- default whick-key.nvim defined Nerd Font icons, otherwise define a string table
-				keys = vim.g.have_nerd_font and {} or {
-					Up = "<Up> ",
-					Down = "<Down> ",
-					Left = "<Left> ",
-					Right = "<Right> ",
-					C = "<C-…> ",
-					M = "<M-…> ",
-					D = "<D-…> ",
-					S = "<S-…> ",
-					CR = "<CR> ",
-					Esc = "<Esc> ",
-					ScrollWheelDown = "<ScrollWheelDown> ",
-					ScrollWheelUp = "<ScrollWheelUp> ",
-					NL = "<NL> ",
-					BS = "<BS> ",
-					Space = "<Space> ",
-					Tab = "<Tab> ",
-					F1 = "<F1>",
-					F2 = "<F2>",
-					F3 = "<F3>",
-					F4 = "<F4>",
-					F5 = "<F5>",
-					F6 = "<F6>",
-					F7 = "<F7>",
-					F8 = "<F8>",
-					F9 = "<F9>",
-					F10 = "<F10>",
-					F11 = "<F11>",
-					F12 = "<F12>",
-				},
-			},
-
-			-- Document existing key chains
-			spec = {
-				{ "<leader>c", group = "[C]ode", mode = { "n", "x" } },
-				{ "<leader>d", group = "[D]ocument" },
-				{ "<leader>r", group = "[R]ename" },
-				{ "<leader>s", group = "[S]earch" },
-				{ "<leader>w", group = "[W]orkspace" },
-				{ "<leader>t", group = "[T]oggle" },
-				{ "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
-			},
+	-- Useful plugin to show you pending keybinds (replaces which-key)
+	{
+		"nvim-mini/mini.clue",
+		event = "VimEnter",
+		version = false,
+		dependencies = {
+			"nvim-mini/mini.icons",
 		},
+		config = function()
+			local miniclue = require("mini.clue")
+			miniclue.setup({
+				triggers = {
+					-- Leader triggers
+					{ mode = { "n", "x" }, keys = "<leader>" },
+
+					-- `[` and `]` keys
+					{ mode = "n", keys = "[" },
+					{ mode = "n", keys = "]" },
+
+					-- Built-in completion
+					{ mode = "i", keys = "<C-x>" },
+
+					-- `g` key
+					{ mode = { "n", "x" }, keys = "g" },
+
+					-- Marks
+					{ mode = { "n", "x" }, keys = "'" },
+					{ mode = { "n", "x" }, keys = "`" },
+
+					-- Registers
+					{ mode = { "n", "x" }, keys = '"' },
+					{ mode = { "i", "c" }, keys = "<C-r>" },
+
+					-- Window commands
+					{ mode = "n", keys = "<C-w>" },
+
+					-- `z` key
+					{ mode = { "n", "x" }, keys = "z" },
+				},
+
+				-- Enhance this by adding descriptions for <Leader> mapping groups
+				clues = {
+					miniclue.gen_clues.square_brackets(),
+					miniclue.gen_clues.builtin_completion(),
+					miniclue.gen_clues.g(),
+					miniclue.gen_clues.marks(),
+					miniclue.gen_clues.registers(),
+					miniclue.gen_clues.windows(),
+					miniclue.gen_clues.z(),
+					-- Heredados de which-key
+					{ mode = { "n", "x" }, keys = "<leader>c", desc = "[C]ode" },
+					{ mode = { "n", "x" }, keys = "<leader>r", desc = "[R]ename" },
+					{ mode = { "n", "x" }, keys = "<leader>g", desc = "[G]it" },
+					{ mode = { "n", "x" }, keys = "<leader>f", desc = "[F]ind" },
+					{ mode = { "n", "x" }, keys = "<leader>w", desc = "[W]orkspace" },
+					{ mode = { "n", "x" }, keys = "<leader>t", desc = "[T]oggle" },
+				},
+			})
+		end,
 	},
 	{ -- LSP Configuration & Plugins
 		"neovim/nvim-lspconfig",
@@ -193,9 +198,9 @@ return {
 					--
 					-- This may be unwanted, since they displace some of your code
 					if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-						map("<leader>ih", function()
+						map("<leader>ti", function()
 							vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-						end, "Toggle [I]nlay [H]ints")
+						end, "[T]oggle [I]nlay hints")
 					end
 				end,
 			})
@@ -297,30 +302,26 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {},
 	},
-
-	{ -- Highlight, edit, and navigate code
+	-- Highlight, edit, and navigate code
+	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
 		build = ":TSUpdate",
-		opts = {
-			ensure_installed = { "bash", "go", "python", "css", "html", "lua", "luadoc", "markdown", "vim", "vimdoc" },
-			auto_install = true,
-			highlight = {
-				enable = true,
-				additional_vim_regex_highlighting = { "ruby" },
-			},
-			indent = { enable = true, disable = { "ruby" } },
-		},
-		config = function(_, opts)
-			-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-			---@diagnostic disable-next-line: missing-fields
-			require("nvim-treesitter.configs").setup(opts)
-
-			-- There are additional nvim-treesitter modules that you can use to interact
-			-- with nvim-treesitter. You should go explore a few and see what interests you:
-			--
-			--    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-			--    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-			--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+		config = function()
+			-- main branch setup() is minimal - only install_dir option
+			require("nvim-treesitter").setup({})
+		end,
+	},
+	{
+		"mks-h/treesitter-autoinstall.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		config = function()
+			require("treesitter-autoinstall").setup({
+				highlight = true,
+				ignore = {
+					-- ignore list
+				},
+			})
 		end,
 	},
 }
