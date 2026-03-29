@@ -3,8 +3,8 @@
 window-padding-x = 4
 window-padding-y = 4
 background-opacity = 0.9
-window-height = 48
-window-width = 175
+window-height = 42
+window-width = 170
 theme = Aura
 background = #15141b
 foreground = #edecee
