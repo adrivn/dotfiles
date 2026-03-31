@@ -2,6 +2,8 @@
 bat = "latest"
 btop = "latest"
 delta = "latest"
+docker-cli = "latest"
+docker-compose = "latest"
 duckdb = "latest"
 eza = "latest"
 fd = "latest"

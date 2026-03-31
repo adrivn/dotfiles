@@ -5,6 +5,7 @@ window-padding-y = 4
 background-opacity = 0.9
 window-height = 42
 window-width = 170
+copy-on-select = clipboard
 theme = Aura
 background = #15141b
 foreground = #edecee
