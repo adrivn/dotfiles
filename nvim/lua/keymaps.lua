@@ -41,21 +41,8 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }
 vim.keymap.set("n", "<leader>tn", "<cmd>echo 'Not yet!'<CR>", { desc = "[T]oggle line [N]umber" })
 vim.keymap.set("n", "<leader>tr", "<cmd>echo 'Not yet!'<CR>", { desc = "[T]oggle [R]elative line number" })
 
--- hop.nvim
-local hop = require("hop")
-local directions = require("hop.hint").HintDirection
-vim.keymap.set("", "f", function()
-	hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
-end, { remap = true })
-vim.keymap.set("", "F", function()
-	hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
-end, { remap = true })
-vim.keymap.set("", "t", function()
-	hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false, hint_offset = -1 })
-end, { remap = true })
-vim.keymap.set("", "T", function()
-	hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false, hint_offset = 1 })
-end, { remap = true })
+-- jump (like hop)
+vim.keymap.set({ "n", "x", "o" }, "f", require("jump").start, { remap = true })
 
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
