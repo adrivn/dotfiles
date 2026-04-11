@@ -42,12 +42,10 @@ return {
 			excluded_filetypes = {
 				"cmp_docs",
 				"cmp_menu",
-				"noice",
 				"prompt",
 				"dropbar_menu",
 				"dropbar_menu_fzf",
 				"TelescopePrompt",
-				"alpha",
 			},
 		},
 	},
@@ -137,7 +135,7 @@ return {
 					--        
 					section_separators = { left = "", right = "" },
 					component_separators = { left = "", right = "" },
-					disabled_filetypes = { "alpha" },
+					disabled_filetypes = { "snacks.dashboard" },
 					always_divide_middle = true,
 					globalstatus = true,
 				},

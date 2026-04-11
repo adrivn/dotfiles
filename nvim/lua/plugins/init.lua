@@ -6,14 +6,8 @@ return {
 		"lewis6991/gitsigns.nvim",
 		opts = {},
 	},
-	--  hop.nvim [go to word visually]
-	--  https://github.com/smoka7/hop.nvim
-	{
-		"smoka7/hop.nvim",
-		event = "VeryLazy",
-		cmd = { "HopWord" },
-		opts = { keys = "etovxqpdygfblzhckisuran" },
-	},
+	-- the smallest jump plugin in the west
+	{ "yorickpeterse/nvim-jump", opts = {} },
 	-- Useful plugin to show you pending keybinds (replaces which-key)
 	{
 		"nvim-mini/mini.clue",
