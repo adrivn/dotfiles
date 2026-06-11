@@ -52,6 +52,10 @@ return {
 
 	-- tree file browser
 	{ "nvim-mini/mini.files", version = false, opts = {} },
+	-- user input
+	{ "nvim-mini/mini.input", version = false, opts = {} },
+	-- notify
+	{ "nvim-mini/mini.notify", version = false, opts = {} },
 	-- highlight undo
 	{
 		"tzachar/highlight-undo.nvim",
