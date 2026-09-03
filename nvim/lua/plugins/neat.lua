@@ -126,6 +126,9 @@ return {
 			},
 		},
 	},
+	-- Various nice-to-have plugins
+	{ "nvim-mini/mini.align", version = false, opts = {} },
+	{ "nvim-mini/mini.extra", version = false, opts = {} },
 	{
 		"akinsho/toggleterm.nvim",
 		version = "*",
