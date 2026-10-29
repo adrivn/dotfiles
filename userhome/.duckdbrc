@@ -6,3 +6,6 @@ INSTALL httpfs;
 LOAD httpfs;
 
 .timer on
+
+SET memory_limit='2GB';
+SET threads=8;

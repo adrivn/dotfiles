@@ -9,8 +9,11 @@ mise activate fish | source
 
 # fdfind may not need to be renamed, only in ubuntu, ignore for now
 alias cat="bat"
+alias catp="bat -p"
+alias ll="eza --long"
 alias lsd="eza --long --header --git --icons"
-alias lst="eza --tree --long --header --git --icons --level=2"
+alias lt="eza --tree --level=2"
+alias lst="eza --tree --long --header --git --icons --level=3"
 
 if status is-interactive
     # Commands to run in interactive sessions can go here

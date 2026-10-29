@@ -3,14 +3,16 @@
 	email = adrian.emege@gmail.com
 
 [core]
-    pager = delta
+	pager = delta
 
 [interactive]
-    diffFilter = delta --color-only
+	diffFilter = delta --color-only
 
 [delta]
-    navigate = true  # use n and N to move between diff sections
+	navigate = true
     dark = true      # or light = true, or omit for auto-detection
 
 [merge]
-    conflictstyle = zdiff3
+	conflictStyle = zdiff3
+[init]
+	defaultBranch = master
